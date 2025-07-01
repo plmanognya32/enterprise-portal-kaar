@@ -9,6 +9,8 @@ const PORT = 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
+const SAP_CONFIG = {};
+
 // Replace with your actual SAP credentials and host
 const SAP_BASE_URL = "http://AZKTLDS5CP.kcloud.com:8000/sap/opu/odata/SAP";
 const SAP_AUTH = {

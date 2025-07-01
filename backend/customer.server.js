@@ -1,4 +1,3 @@
-//sap-proxy-server.js
 require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -13,7 +12,7 @@ const app = express();
 const PORT = 3001;
 
 const agent = new https.Agent({
-  rejectUnauthorized: false, // 👈 disables cert check
+  rejectUnauthorized: false,
 });
 
 app.use(cors());
@@ -830,3 +829,5 @@ app.post("/api/get-invoice-pdf", async (req, res) => {
     });
   }
 });
+
+
