@@ -1,0 +1,138 @@
+<nav
+  class="sticky top-0 shadow-md z-[9999] flex justify-center bg-gray-900 px-4 py-3 lg:px-6 lg:py-4"
+>
+  <div
+    class="container flex items-center justify-between mx-auto text-white max-w-7xl"
+  >
+    <!-- Left Section: Back Button and Logo -->
+    <div class="flex items-center gap-4">
+      <button
+        class="flex items-center justify-center p-1.5 rounded-lg transition-all duration-300 ease-in-out bg-transparent hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-[#009689] focus:ring-offset-2 focus:ring-offset-gray-900"
+        (click)="goBack()"
+        aria-label="Go back"
+      >
+        <svg
+          class="w-5 h-5 text-gray-300 transition-transform duration-300 ease-in-out hover:-translate-x-0.5"
+          fill="currentColor"
+          viewBox="0 0 330 330"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M111.213,165.004L250.607,25.607c5.858-5.858,5.858-15.355,0-21.213c-5.858-5.858-15.355-5.858-21.213,0.001 l-150,150.004C76.58,157.211,75,161.026,75,165.004c0,3.979,1.581,7.794,4.394,10.607l150,149.996 C232.322,328.536,236.161,330,240,330s7.678-1.464,10.607-4.394c5.858-5.858,5.858-15.355,0-21.213L111.213,165.004z"
+          ></path>
+        </svg>
+      </button>
+
+      <a
+        routerLink="/customer/dashboard"
+        class="text-xl font-semibold text-white transition-colors duration-300 ease-in-out hover:text-[#009689]"
+      >
+        Customer Portal
+      </a>
+    </div>
+
+    <!-- Right Section: Navigation Links, Dropdown, Logout -->
+    <div class="flex items-center gap-6">
+      <ul class="flex items-center gap-6">
+        <li>
+          <a
+            routerLink="/customer/dashboard"
+            class="relative text-gray-300 hover:text-[#009689] transition-colors duration-300 ease-in-out font-medium text-sm py-1 px-2"
+          >
+            Dashboard
+            <span
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-[#009689] transform scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left"
+            ></span>
+          </a>
+        </li>
+        <li>
+          <span class="w-px h-4 bg-gray-700"></span>
+        </li>
+        <li>
+          <a
+            routerLink="/customer/profile"
+            class="relative text-gray-300 hover:text-[#009689] transition-colors duration-300 ease-in-out font-medium text-sm py-1 px-2"
+          >
+            Profile
+            <span
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-[#009689] transform scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left"
+            ></span>
+          </a>
+        </li>
+        <li>
+          <span class="w-px h-4 bg-gray-700"></span>
+        </li>
+        <li class="relative group">
+          <a
+            class="flex items-center text-gray-300 hover:text-[#009689] transition-colors duration-300 ease-in-out font-medium text-sm cursor-pointer py-1 px-2"
+            tabindex="0"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <span class="mr-1">Financial Sheet</span>
+            <svg
+              class="w-4 h-4 transform group-hover:rotate-180 transition-transform duration-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+            <span
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-[#009689] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left"
+            ></span>
+          </a>
+          <ul
+            class="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transform translate-y-1 group-hover:translate-y-0 transition-all duration-300 ease-in-out origin-top z-20"
+          >
+            <li>
+              <a
+                routerLink="/customer/financial-sheet/invoices"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#e6fff9] hover:text-[#009689] rounded-t-lg transition-colors duration-200"
+              >
+                Invoice Details
+              </a>
+            </li>
+            <li>
+              <a
+                routerLink="/customer/financial-sheet/payments"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#e6fff9] hover:text-[#009689] transition-colors duration-200"
+              >
+                Payments
+              </a>
+            </li>
+            <li>
+              <a
+                routerLink="/customer/financial-sheet/memos"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#e6fff9] hover:text-[#009689] transition-colors duration-200"
+              >
+                Credit/Debit Memos
+              </a>
+            </li>
+            <li>
+              <a
+                routerLink="/customer/financial-sheet/sales"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#e6fff9] hover:text-[#009689] rounded-b-lg transition-colors duration-200"
+              >
+                Overall Sales
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <button
+        class="bg-[#009689] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#007b6e] focus:outline-none focus:ring-2 focus:ring-[#009689] focus:ring-offset-2 focus:ring-offset-gray-900 transition-colors duration-300 ease-in-out"
+        (click)="logout()"
+        aria-label="Logout"
+      >
+        Logout
+      </button>
+    </div>
+  </div>
+</nav>

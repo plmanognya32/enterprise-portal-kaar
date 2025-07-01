@@ -1,0 +1,106 @@
+<app-employee-navbar></app-employee-navbar>
+
+<div class="min-h-screen bg-gray-50 py-8 px-4 md:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+      <div class="px-4 py-5 sm:px-6 border-b border-gray-200">
+        <h2 class="text-2xl font-bold text-gray-900">Payslips</h2>
+      </div>
+      <div class="px-4 py-5 sm:p-6">
+        <div *ngIf="loading" class="text-center py-4">
+          <svg
+            class="animate-spin h-8 w-8 text-[#9A5FC0] mx-auto"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v8h8a8 8 0 11-16 0z"
+            ></path>
+          </svg>
+          <p class="mt-2 text-sm text-gray-600">Loading payslips...</p>
+        </div>
+        <div *ngIf="errorMessage" class="text-center py-4 text-red-600">
+          {{ errorMessage }}
+        </div>
+        <div
+          *ngIf="payslips.length === 0 && !loading && !errorMessage"
+          class="text-center py-4 text-gray-500"
+        >
+          No payslips found.
+        </div>
+        <table
+          *ngIf="payslips.length > 0"
+          class="min-w-full divide-y divide-gray-200"
+        >
+          <thead class="bg-gray-50">
+            <tr>
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Record No
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Pay Scale Group
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Last Changed
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr *ngFor="let slip of payslips">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                {{ slip.recordNo }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                {{ slip.payScaleGrp }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                {{ slip.lastChangedOn | date : "mediumDate" }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <button
+                  class="bg-[#9A5FC0] text-white px-3 py-1 rounded-md text-sm font-medium hover:bg-[#7f4ba1] focus:outline-none focus:ring-2 focus:ring-[#9A5FC0] focus:ring-offset-2 mr-2"
+                  (click)="downloadPayslip(slip.id)"
+                  [disabled]="downloading"
+                >
+                  Download
+                </button>
+                <button
+                  class="bg-[#9A5FC0] text-white px-3 py-1 rounded-md text-sm font-medium hover:bg-[#7f4ba1] focus:outline-none focus:ring-2 focus:ring-[#9A5FC0] focus:ring-offset-2"
+                  (click)="emailPayslip(slip.id)"
+                >
+                  Email
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

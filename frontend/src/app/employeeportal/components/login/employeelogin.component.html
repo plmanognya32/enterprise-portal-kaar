@@ -1,0 +1,157 @@
+<div class="flex min-h-screen items-center justify-center bg-gray-200">
+  <div
+    class="flex flex-col md:flex-row w-full max-w-6xl bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl shadow-xl overflow-hidden"
+  >
+    <!-- Left Panel: Login Form -->
+    <div
+      class="w-full md:w-1/2 flex flex-col justify-center items-center p-8 md:p-12"
+    >
+      <div class="w-full max-w-md">
+        <div class="items-center text-center mb-8">
+          <h1 class="text-5xl font-extrabold text-gray-700 mb-4">
+            Welcome Back, Employee!
+          </h1>
+          <p class="text-lg text-gray-500 font-normal">
+            Manage your tasks, access records, and stay connected — all in one
+            portal.
+          </p>
+        </div>
+
+        <!-- Form Begins -->
+        <form [formGroup]="employeeLoginForm" (ngSubmit)="onSubmit()">
+          <!-- Employee ID Field -->
+          <div class="mb-5">
+            <input
+              type="text"
+              formControlName="employeeId"
+              placeholder="Employee ID"
+              class="border border-gray-300 p-3 px-5 text-gray-600 w-full rounded-full focus:outline-none focus:ring-2 focus:ring-[#A366CC] focus:border-transparent placeholder-gray-400"
+              [ngClass]="{
+                'border-red-300':
+                  employeeLoginForm.get('employeeId')?.invalid &&
+                  employeeLoginForm.get('employeeId')?.touched
+              }"
+            />
+            <div
+              *ngIf="
+                employeeLoginForm.get('employeeId')?.invalid &&
+                employeeLoginForm.get('employeeId')?.touched
+              "
+              class="text-red-300 text-sm mt-1"
+            >
+              Employee ID is required
+            </div>
+          </div>
+
+          <!-- Password Field -->
+          <div class="mb-6 relative">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              placeholder="Password"
+              class="border border-gray-300 p-3 px-5 text-gray-600 w-full rounded-full focus:outline-none focus:ring-2 focus:ring-[#A366CC] focus:border-transparent pr-12 placeholder-gray-400"
+              [ngClass]="{
+                'border-red-300':
+                  employeeLoginForm.get('password')?.invalid &&
+                  employeeLoginForm.get('password')?.touched
+              }"
+            />
+            <button
+              mat-icon-button
+              type="button"
+              (click)="showPassword = !showPassword"
+              class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-[#A366CC] transition-colors duration-200"
+              aria-label="Toggle password visibility"
+            >
+              <mat-icon style="font-size: 24px; width: 24px; height: 24px">
+                {{ showPassword ? "visibility_off" : "visibility" }}
+              </mat-icon>
+            </button>
+            <div
+              *ngIf="
+                employeeLoginForm.get('password')?.invalid &&
+                employeeLoginForm.get('password')?.touched
+              "
+              class="text-red-300 text-sm mt-1"
+            >
+              Password is required
+            </div>
+          </div>
+
+          <!-- Forgot Password -->
+          <div class="text-right text-sm mb-6">
+            <a href="#" class="text-[#A366CC] hover:underline font-medium"
+              >Forgot Password?</a
+            >
+          </div>
+
+          <!-- Error Message -->
+          <div
+            *ngIf="loginMessage && !isLoading"
+            class="mt-6 text-red-300 text-center text-sm font-medium"
+          >
+            {{ loginMessage }}
+          </div>
+
+          <!-- Login Button -->
+          <button
+            type="submit"
+            [disabled]="employeeLoginForm.invalid || isLoading"
+            class="bg-[#A366CC] text-white w-full p-3 rounded-full hover:bg-[#8F57B3] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-lg shadow-sm"
+          >
+            {{ isLoading ? "Logging in..." : "Login" }}
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Right Panel: Illustration -->
+    <div
+      class="hidden md:flex w-full md:w-1/2 flex-col items-center justify-center p-12 bg-gradient-to-br from-[#A366CC] to-[#8F57B3] relative overflow-hidden rounded-r-2xl"
+    >
+      <div class="absolute inset-0 opacity-10">
+        <svg class="w-full h-full" fill="none" viewBox="0 0 400 400">
+          <circle
+            cx="50"
+            cy="50"
+            r="30"
+            fill="currentColor"
+            class="text-[#BFA6D6] opacity-75"
+          ></circle>
+          <circle
+            cx="350"
+            cy="150"
+            r="40"
+            fill="currentColor"
+            class="text-[#D1C4E0] opacity-75"
+          ></circle>
+          <circle
+            cx="150"
+            cy="350"
+            r="25"
+            fill="currentColor"
+            class="text-[#A88BC2] opacity-75"
+          ></circle>
+          <rect
+            x="200"
+            y="100"
+            width="80"
+            height="80"
+            rx="15"
+            ry="15"
+            fill="currentColor"
+            class="text-[#BFA6D6] opacity-75"
+          ></rect>
+        </svg>
+      </div>
+      <img
+        src="assets/illustration3.png"
+        alt="Employee Portal"
+        class="max-w-sm z-10"
+      />
+      <p class="mt-3 text-white text-xl font-medium text-center z-10">
+        Your work, streamlined.
+      </p>
+    </div>
+  </div>
+</div>

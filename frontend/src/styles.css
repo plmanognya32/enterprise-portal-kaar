@@ -1,0 +1,33 @@
+@import "tailwindcss";
+body{
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    overflow: x-scroll;
+}
+
+/* .cursor-dot{
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background: #263238;
+    border-radius: 50%;
+    opacity: 1;
+    transition: transform 0.1s ease-out;
+    animation: pulse 2s infinite ease-in-out;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+  } */
+  

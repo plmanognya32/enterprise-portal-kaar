@@ -1,0 +1,212 @@
+<div *ngIf="!loading; else loadingTemplate">
+  <div *ngIf="!error; else errorTemplate">
+    <div *ngIf="employeeProfile; else noProfileTemplate">
+      <app-employee-navbar></app-employee-navbar>
+      <div class="min-h-screen bg-gray-50 py-8 px-4 md:px-6 lg:px-8">
+        <div
+          class="max-w-5xl mx-auto bg-white shadow-sm rounded-lg p-6 md:p-8 border border-gray-100"
+        >
+          <!-- Profile Header -->
+
+          <div
+            class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-8"
+          >
+            <div
+              class="w-16 h-16 rounded-full bg-[#9A5FC0] flex items-center justify-center text-white text-2xl font-semibold shadow-sm"
+            >
+              <span *ngIf="employeeProfile?.name; else noName">
+                {{ employeeProfile.name.charAt(0) }}
+              </span>
+              <ng-template #noName>?</ng-template>
+            </div>
+            <div class="text-center sm:text-left">
+              <h1 class="text-2xl font-semibold text-gray-800">
+                {{ employeeProfile.name || "Employee Name" }}
+              </h1>
+              <p class="text-gray-600 text-sm font-medium mt-1">
+                Employee ID:
+                <span class="font-semibold text-gray-700">{{
+                  employeeProfile.employeeId || "N/A"
+                }}</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Profile Fields -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <app-profile-field
+              label="Phone"
+              icon="phone"
+              [value]="employeeProfile.phone || '9123XXXXXX'"
+            ></app-profile-field>
+
+            <app-profile-field
+              label="Email ID"
+              icon="mail"
+              [value]="employeeProfile.email || 'example@kaartech.com'"
+            ></app-profile-field>
+
+            <app-profile-field
+              label="Date of Birth"
+              icon="event"
+              [value]="employeeProfile.dob || '12th June 2025'"
+            ></app-profile-field>
+
+            <app-profile-field
+              label="Gender"
+              icon="person"
+              [value]="employeeProfile.gender || 'Male'"
+            ></app-profile-field>
+
+            <app-profile-field
+              label="Date of Joining"
+              icon="access_time"
+              [value]="employeeProfile.joiningDate || 'Not available'"
+            ></app-profile-field>
+
+            <app-profile-field
+              label="Position"
+              icon="workspace_premium"
+              [value]="employeeProfile.position || 'Not available'"
+            ></app-profile-field>
+
+            <div class="lg:col-span-3 md:col-span-2">
+              <label class="block text-gray-700 font-medium text-sm mb-2"
+                >Address</label
+              >
+              <div
+                class="flex items-start border border-gray-200 rounded-lg px-4 py-3 bg-white shadow-sm hover:shadow-md transition-shadow duration-200"
+              >
+                <mat-icon class="text-[#9A5FC0] text-lg mr-3 mt-1 flex-shrink-0"
+                  >location_on</mat-icon
+                >
+                <p class="text-gray-700 text-sm leading-relaxed">
+                  {{ employeeProfile.address || "Not available" }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Employment Details -->
+          <div class="mt-8">
+            <h2 class="text-lg font-medium text-gray-900 mb-4">
+              Employment Details
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <app-profile-field
+                label="Company Code"
+                icon="business"
+                [value]="employeeProfile.companyCode || 'Not available'"
+              ></app-profile-field>
+
+              <app-profile-field
+                label="Personnel Area"
+                icon="location_city"
+                [value]="employeeProfile.personnelArea || 'Not available'"
+              ></app-profile-field>
+
+              <app-profile-field
+                label="Personnel Sub-area"
+                icon="location_on"
+                [value]="employeeProfile.personnelSubarea || 'Not available'"
+              ></app-profile-field>
+
+              <app-profile-field
+                label="Employee Group"
+                icon="group"
+                [value]="employeeProfile.employeeGroup || 'Not available'"
+              ></app-profile-field>
+
+              <app-profile-field
+                label="Employee Subgroup"
+                icon="group_add"
+                [value]="employeeProfile.employeeSubGroup || 'Not available'"
+              ></app-profile-field>
+
+              <app-profile-field
+                label="Organizational Key"
+                icon="key"
+                [value]="employeeProfile.organizationalKey || 'Not available'"
+              ></app-profile-field>
+
+              <app-profile-field
+                label="Payroll Area"
+                icon="account_balance"
+                [value]="employeeProfile.payrollArea || 'Not available'"
+              ></app-profile-field>
+
+              <app-profile-field
+                label="Administrator Group"
+                icon="supervisor_account"
+                [value]="employeeProfile.adminGroup || 'Not available'"
+              ></app-profile-field>
+
+              <app-profile-field
+                label="Profile Last Updated"
+                icon="update"
+                [value]="employeeProfile.lastUpdated || 'Not available'"
+              ></app-profile-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
+  <div
+    class="flex flex-col items-center justify-center min-h-screen bg-gray-50 text-gray-700 p-6"
+  >
+    <svg
+      class="animate-spin h-8 w-8 text-[#9A5FC0] mb-3"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <circle
+        class="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        stroke-width="4"
+      ></circle>
+      <path
+        class="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8v8h8a8 8 0 11-16 0z"
+      ></path>
+    </svg>
+    <p class="text-base font-medium">Loading employee profile...</p>
+  </div>
+</ng-template>
+
+<ng-template #errorTemplate>
+  <div
+    class="flex flex-col items-center justify-center min-h-screen bg-gray-50 text-gray-700 p-6"
+  >
+    <mat-icon class="text-5xl text-red-500 mb-3">error_outline</mat-icon>
+    <p class="text-lg font-semibold mb-3 text-center">{{ error }}</p>
+    <button
+      mat-raised-button
+      color="primary"
+      class="bg-[#9A5FC0] hover:bg-[#7f4ba1] text-white font-medium py-2 px-5 rounded-lg shadow-sm transition-colors duration-300 flex items-center"
+      (click)="loadProfile()"
+    >
+      <mat-icon class="mr-2 text-base">refresh</mat-icon> Retry
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #noProfileTemplate>
+  <div
+    class="flex flex-col items-center justify-center min-h-screen bg-gray-50 text-gray-700 p-6"
+  >
+    <mat-icon class="text-5xl text-gray-500 mb-3">person_off</mat-icon>
+    <p class="text-lg font-semibold mb-3">No profile data available</p>
+    <p class="text-sm text-gray-600 text-center">
+      It seems there's no employee profile to display at the moment.
+    </p>
+  </div>
+</ng-template>

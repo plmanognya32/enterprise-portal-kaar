@@ -1,0 +1,232 @@
+<app-employee-navbar></app-employee-navbar>
+
+<div class="min-h-screen bg-gray-50 py-8 px-4 md:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl font-bold text-gray-900">Leave Management</h1>
+      <button
+        class="bg-[#9A5FC0] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#7f4ba1] focus:outline-none focus:ring-2 focus:ring-[#9A5FC0] focus:ring-offset-2 focus:ring-offset-gray-50 transition-colors duration-300 ease-in-out"
+        (click)="requestLeave()"
+        aria-label="Request Leave"
+      >
+        Request Leave
+      </button>
+    </div>
+
+    <!-- Leave Balance Card -->
+    <div class="bg-white shadow overflow-hidden sm:rounded-lg mb-8">
+      <div class="px-4 py-5 sm:px-6 border-b border-gray-200">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+          Leave Balance
+        </h3>
+      </div>
+      <div class="px-4 py-5 sm:p-6">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+          <div class="bg-[#f0e6f8] p-4 rounded-lg">
+            <h4 class="text-sm font-medium text-[#9A5FC0]">Annual Leave</h4>
+            <p class="mt-1 text-2xl font-semibold text-[#9A5FC0]">
+              15 <span class="text-sm font-normal">days remaining</span>
+            </p>
+          </div>
+          <div class="bg-[#e6f0fa] p-4 rounded-lg">
+            <h4 class="text-sm font-medium text-[#4a90e2]">Sick Leave</h4>
+            <p class="mt-1 text-2xl font-semibold text-[#4a90e2]">
+              10 <span class="text-sm font-normal">days remaining</span>
+            </p>
+          </div>
+          <div class="bg-[#f3e8ff] p-4 rounded-lg">
+            <h4 class="text-sm font-medium text-[#6b46c1]">Other Leave</h4>
+            <p class="mt-1 text-2xl font-semibold text-[#6b46c1]">
+              5 <span class="text-sm font-normal">days remaining</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Leave History Card -->
+    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+      <div class="px-4 py-5 sm:px-6 border-b border-gray-200">
+        <div class="flex justify-between items-center">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Leave History
+          </h3>
+          <div class="flex space-x-2">
+            <select
+              class="border-gray-300 rounded-md shadow-sm text-sm focus:ring-[#9A5FC0] focus:border-[#9A5FC0] transition-colors duration-200 ease-in-out"
+            >
+              <option>All Types</option>
+              <option>Annual</option>
+              <option>Sick</option>
+              <option>Other</option>
+            </select>
+            <select
+              class="border-gray-300 rounded-md shadow-sm text-sm focus:ring-[#9A5FC0] focus:border-[#9A5FC0] transition-colors duration-200 ease-in-out"
+            >
+              <option>All Status</option>
+              <option>Approved</option>
+              <option>Pending</option>
+              <option>Rejected</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Leave Type
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                From
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                To
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Days
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Status
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr *ngFor="let leave of leaveHistory">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                {{ leave.type }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                {{ leave.from | date : "mediumDate" }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                {{ leave.to | date : "mediumDate" }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                {{ leave.days }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span
+                  [ngClass]="{
+                    'bg-green-100 text-green-800': leave.status === 'Approved',
+                    'bg-yellow-100 text-yellow-800': leave.status === 'Pending',
+                    'bg-red-100 text-red-800': leave.status === 'Rejected'
+                  }"
+                  class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
+                >
+                  {{ leave.status }}
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <button
+                  class="text-[#9A5FC0] hover:text-[#7f4ba1] mr-3 transition-colors duration-200 ease-in-out"
+                  (click)="viewLeave(leave)"
+                >
+                  View
+                </button>
+                <!-- <button
+                  *ngIf="leave.status === 'Pending'"
+                  class="text-red-600 hover:text-red-900"
+                  (click)="closeModal()"
+                >
+                  Cancel
+                </button> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div
+      *ngIf="showModal"
+      class="fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center"
+    >
+      <!-- Modal Content -->
+      <div
+        class="bg-white rounded-lg shadow-xl max-w-xl w-full p-6 relative z-50"
+      >
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Leave Details</h2>
+
+        <div class="grid grid-cols-2 gap-4 text-sm">
+          <div>
+            <strong>Employee ID:</strong> {{ selectedLeave?.employeeId }}
+          </div>
+          <div><strong>Leave Start:</strong> {{ selectedLeave?.from }}</div>
+          <div><strong>Leave End:</strong> {{ selectedLeave?.to }}</div>
+          <div><strong>Attendance Type:</strong> {{ selectedLeave?.type }}</div>
+          <div><strong>No. of Days:</strong> {{ selectedLeave?.days }}</div>
+          <div>
+            <strong>No. of Hours:</strong> {{ selectedLeave?.absenceHours }}
+          </div>
+          <div>
+            <strong>Payroll Days:</strong> {{ selectedLeave?.payrollDays }}
+          </div>
+          <div>
+            <strong>Payroll Hours:</strong> {{ selectedLeave?.payrollHours }}
+          </div>
+          <div>
+            <strong>Days Credited:</strong> {{ selectedLeave?.creditedDays }}
+          </div>
+          <div>
+            <strong>Subsequent Illness:</strong>
+            {{ selectedLeave?.subsequentIllness }}
+          </div>
+          <div>
+            <strong>Repeated Illness:</strong>
+            {{ selectedLeave?.repeatedIllness }}
+          </div>
+          <div>
+            <strong>Calendar Days:</strong> {{ selectedLeave?.calendarDays }}
+          </div>
+          <div>
+            <strong>Premium Indicator:</strong>
+            {{ selectedLeave?.premiumIndicator }}
+          </div>
+          <div><strong>Position:</strong> {{ selectedLeave?.position }}</div>
+          <div>
+            <strong>Reported at:</strong> {{ selectedLeave?.reportedAt }}
+          </div>
+          <div>
+            <strong>Sickness Confirmed at:</strong>
+            {{ selectedLeave?.sicknessConfirmed }}
+          </div>
+          <div>
+            <strong>Record for Full day:</strong> {{ selectedLeave?.status }}
+          </div>
+        </div>
+
+        <!-- Close Button -->
+        <button
+          class="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+          (click)="closeModal()"
+        >
+          ✖
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

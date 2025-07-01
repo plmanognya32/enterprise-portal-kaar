@@ -1,0 +1,226 @@
+<app-vendornavbar></app-vendornavbar>
+
+<div *ngIf="!loading; else loadingTemplate">
+  <div *ngIf="!error; else errorTemplate">
+    <div *ngIf="profile; else noProfileTemplate">
+      <div class="min-h-screen bg-gray-50 py-8 px-4 md:px-6 lg:px-8">
+        <div
+          class="max-w-5xl mx-auto bg-white shadow-sm rounded-lg p-6 md:p-8 border border-gray-100"
+        >
+          <!-- Profile Header -->
+          <div
+            class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-8"
+          >
+            <div
+              class="w-16 h-16 rounded-full bg-[#1E3A8A] flex items-center justify-center text-white text-2xl font-semibold shadow-sm"
+            >
+              <span *ngIf="profile?.NAME1; else noName">
+                {{ profile.NAME1.charAt(0) }}
+              </span>
+              <ng-template #noName>?</ng-template>
+            </div>
+            <div class="text-center sm:text-left">
+              <h1 class="text-2xl font-semibold text-gray-700">
+                {{ profile.NAME1 || "Vendor Name" }}
+              </h1>
+              <p class="text-gray-600 text-sm font-medium mt-1">
+                Vendor ID:
+                <span class="font-semibold text-gray-700">
+                  {{ profile.LIFNR || "N/A" }}
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Profile Fields -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Country -->
+            <div class="flex flex-col">
+              <label class="block text-gray-600 font-medium text-sm mb-2"
+                >Country</label
+              >
+              <div
+                class="flex items-center border border-gray-200 rounded-lg px-4 py-3 bg-white shadow-sm hover:shadow-md transition-shadow duration-200"
+              >
+                <mat-icon class="text-[#1E3A8A] text-lg mr-3 flex-shrink-0"
+                  >flag</mat-icon
+                >
+                <p class="text-gray-700 text-sm">
+                  {{ profile.LAND1 || "Not available" }}
+                </p>
+              </div>
+            </div>
+
+            <!-- Postal Code -->
+            <div class="flex flex-col">
+              <label class="block text-gray-600 font-medium text-sm mb-2"
+                >Postal Code</label
+              >
+              <div
+                class="flex items-center border border-gray-200 rounded-lg px-4 py-3 bg-white shadow-sm hover:shadow-md transition-shadow duration-200"
+              >
+                <mat-icon class="text-[#1E3A8A] text-lg mr-3 flex-shrink-0"
+                  >markunread_mailbox</mat-icon
+                >
+                <p class="text-gray-700 text-sm">
+                  {{ profile.PSTLZ || "Not available" }}
+                </p>
+              </div>
+            </div>
+
+            <!-- Region -->
+            <div class="flex flex-col">
+              <label class="block text-gray-600 font-medium text-sm mb-2"
+                >Region</label
+              >
+              <div
+                class="flex items-center border border-gray-200 rounded-lg px-4 py-3 bg-white shadow-sm hover:shadow-md transition-shadow duration-200"
+              >
+                <mat-icon class="text-[#1E3A8A] text-lg mr-3 flex-shrink-0"
+                  >map</mat-icon
+                >
+                <p class="text-gray-700 text-sm">
+                  {{ profile.REGIO || "Not available" }}
+                </p>
+              </div>
+            </div>
+
+            <!-- Search Term (Sort Key) -->
+            <div class="flex flex-col">
+              <label class="block text-gray-600 font-medium text-sm mb-2"
+                >Search Term</label
+              >
+              <div
+                class="flex items-center border border-gray-200 rounded-lg px-4 py-3 bg-white shadow-sm hover:shadow-md transition-shadow duration-200"
+              >
+                <mat-icon class="text-[#1E3A8A] text-lg mr-3 flex-shrink-0"
+                  >search</mat-icon
+                >
+                <p class="text-gray-700 text-sm">
+                  {{ profile.SORTL || "Not available" }}
+                </p>
+              </div>
+            </div>
+
+            <!-- Address Number -->
+            <div class="flex flex-col">
+              <label class="block text-gray-600 font-medium text-sm mb-2"
+                >Address Number</label
+              >
+              <div
+                class="flex items-center border border-gray-200 rounded-lg px-4 py-3 bg-white shadow-sm hover:shadow-md transition-shadow duration-200"
+              >
+                <mat-icon class="text-[#1E3A8A] text-lg mr-3 flex-shrink-0"
+                  >location_city</mat-icon
+                >
+                <p class="text-gray-700 text-sm">
+                  {{ profile.ADRNR || "Not available" }}
+                </p>
+              </div>
+            </div>
+
+            <!-- Created By -->
+            <div class="flex flex-col">
+              <label class="block text-gray-600 font-medium text-sm mb-2"
+                >Created By</label
+              >
+              <div
+                class="flex items-center border border-gray-200 rounded-lg px-4 py-3 bg-white shadow-sm hover:shadow-md transition-shadow duration-200"
+              >
+                <mat-icon class="text-[#1E3A8A] text-lg mr-3 flex-shrink-0"
+                  >person</mat-icon
+                >
+                <p class="text-gray-700 text-sm">
+                  {{ profile.ERNAM || "Not available" }}
+                </p>
+              </div>
+            </div>
+
+            <!-- Address (spanning multiple columns) -->
+            <div class="lg:col-span-3 md:col-span-2">
+              <label class="block text-gray-600 font-medium text-sm mb-2"
+                >Address</label
+              >
+              <div
+                class="flex items-start border border-gray-200 rounded-lg px-4 py-3 bg-white shadow-sm hover:shadow-md transition-shadow duration-200"
+              >
+                <mat-icon class="text-[#1E3A8A] text-lg mr-3 mt-1 flex-shrink-0"
+                  >location_on</mat-icon
+                >
+                <p class="text-gray-700 text-sm leading-relaxed">
+                  {{ profile.STRAS || ""
+                  }}<span
+                    *ngIf="profile.STRAS && (profile.ORT01 || profile.PSTLZ)"
+                    >,
+                  </span>
+                  {{ profile.ORT01 || ""
+                  }}<span *ngIf="profile.ORT01 && profile.PSTLZ"> - </span>
+                  {{ profile.PSTLZ || "" }}
+                  <span
+                    *ngIf="!profile.STRAS && !profile.ORT01 && !profile.PSTLZ"
+                    >Not available</span
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
+  <div
+    class="flex flex-col items-center justify-center min-h-screen bg-gray-50 text-gray-600 p-6"
+  >
+    <svg
+      class="animate-spin h-8 w-8 text-[#1E3A8A] mb-3"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <circle
+        class="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        stroke-width="4"
+      ></circle>
+      <path
+        class="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8v8h8a8 8 0 11-16 0z"
+      ></path>
+    </svg>
+    <p class="text-base font-medium">Loading vendor profile...</p>
+  </div>
+</ng-template>
+
+<ng-template #errorTemplate>
+  <div
+    class="flex flex-col items-center justify-center min-h-screen bg-gray-50 text-gray-600 p-6"
+  >
+    <mat-icon class="text-5xl text-red-300 mb-3">error_outline</mat-icon>
+    <p class="text-lg font-semibold mb-3 text-center">{{ error }}</p>
+    <button
+      class="bg-[#1E3A8A] hover:bg-[#1E40AF] text-white font-medium py-2 px-5 rounded-lg shadow-sm transition-colors duration-300 flex items-center"
+      (click)="loadProfile()"
+    >
+      <mat-icon class="mr-2 text-base">refresh</mat-icon> Retry
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #noProfileTemplate>
+  <div
+    class="flex flex-col items-center justify-center min-h-screen bg-gray-50 text-gray-600 p-6"
+  >
+    <mat-icon class="text-5xl text-gray-500 mb-3">person_off</mat-icon>
+    <p class="text-lg font-semibold mb-3">No profile data available</p>
+    <p class="text-sm text-gray-600 text-center">
+      It seems there's no vendor profile to display at the moment.
+    </p>
+  </div>
+</ng-template>

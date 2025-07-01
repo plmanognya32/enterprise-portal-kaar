@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Enterprise Portal</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-o6A4s+MZcv+lAcK2v4gSk5z/hk+uMIm09TfT+Rz1n9MyUOIz8sLxK9iQZ+v7MjP0u0yHvjR6rM04HobFSU3tYQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+    <!-- Not used in your current JS -->
+    <div class="cursor-fade"></div>
+    <!-- 🔥 This was missing -->
+
+    <app-root></app-root>
+  </body>
+  <script>
+    const dot = document.querySelector(".cursor-dot");
+
+    let mouseX = 0,
+      mouseY = 0;
+    let fadeX = 0,
+      fadeY = 0;
+
+    document.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    });
+
+    function animate() {
+      fadeX += (mouseX - fadeX) * 0.3;
+      fadeY += (mouseY - fadeY) * 0.3;
+      fade.style.transform = `translate(${fadeX}px, ${fadeY}px)`;
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</html>

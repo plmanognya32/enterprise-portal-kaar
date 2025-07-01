@@ -1,0 +1,89 @@
+<app-customernavbar></app-customernavbar>
+<div
+  class="flex flex-col min-h-screen mx-auto px-4 py-8 max-w-7xl w-full bg-gray-50"
+>
+  <!-- Header -->
+  <h2 class="text-2xl font-semibold text-gray-800 mb-6">Overall Sales</h2>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="flex flex-col items-center justify-center py-8">
+    <svg
+      class="animate-spin h-6 w-6 text-teal-500 mb-2"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <circle
+        class="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        stroke-width="4"
+      ></circle>
+      <path
+        class="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8v8h8a8 8 0 11-16 0z"
+      ></path>
+    </svg>
+    <span class="text-gray-600 text-sm font-medium">Loading sales...</span>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="text-red-500 text-center text-sm font-medium py-8">
+    {{ error }}
+  </div>
+
+  <!-- Sales Orders -->
+  <div
+    *ngIf="!loading && !error && filteredSales.length > 0; else noSales"
+    class="grid gap-4 md:grid-cols-2 lg:grid-cols-3"
+  >
+    <div
+      *ngFor="let order of filteredSales"
+      class="rounded-lg p-5 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-200 ease-in-out bg-white"
+    >
+      <div class="flex justify-between items-start mb-3">
+        <h3 class="font-semibold text-lg text-gray-800">
+          Order: {{ order.documentNumber }}
+        </h3>
+        <span
+          class="text-xs font-medium px-2.5 py-1 bg-teal-50 text-teal-600 rounded-full ring-1 ring-teal-200"
+        >
+          {{ order.processingStatus }}
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 gap-y-2 text-sm text-gray-600">
+        <div class="flex justify-between">
+          <span class="font-medium text-gray-500">Date:</span>
+          <span class="font-semibold">{{
+            order.date | date : "mediumDate"
+          }}</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="font-medium text-gray-500">Material:</span>
+          <span>{{ order.material }} - {{ order.description }}</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="font-medium text-gray-500">Quantity:</span>
+          <span>{{ order.quantity }} {{ order.unit }}</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="font-medium text-gray-500">Net Value:</span>
+          <span class="font-semibold">{{
+            order.netValue | currency : order.currency
+          }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Sales State -->
+  <ng-template #noSales>
+    <div class="p-6 text-center bg-gray-50 rounded-lg">
+      <p class="text-gray-500 text-sm">No sales orders found.</p>
+    </div>
+  </ng-template>
+</div>

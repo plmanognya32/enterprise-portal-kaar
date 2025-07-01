@@ -1,0 +1,100 @@
+<nav
+  class="sticky top-0 shadow-md z-[9999] flex justify-center bg-gray-900 px-4 py-3 lg:px-6 lg:py-4"
+>
+  <div
+    class="container flex items-center justify-between mx-auto text-white max-w-7xl"
+  >
+    <!-- Left Section: Back Button and Logo -->
+    <div class="flex items-center gap-4">
+      <button
+        class="flex items-center justify-center p-1.5 rounded-lg transition-all duration-300 ease-in-out bg-transparent hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-[#9A5FC0] focus:ring-offset-2 focus:ring-offset-gray-900"
+        (click)="goBack()"
+        aria-label="Go back"
+      >
+        <svg
+          class="w-5 h-5 text-gray-300 transition-transform duration-300 ease-in-out hover:-translate-x-0.5"
+          fill="currentColor"
+          viewBox="0 0 330 330"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M111.213,165.004L250.607,25.607c5.858-5.858,5.858-15.355,0-21.213c-5.858-5.858-15.355-5.858-21.213,0.001 l-150,150.004C76.58,157.211,75,161.026,75,165.004c0,3.979,1.581,7.794,4.394,10.607l150,149.996 C232.322,328.536,236.161,330,240,330s7.678-1.464,10.607-4.394c5.858-5.858,5.858-15.355,0-21.213L111.213,165.004z"
+          ></path>
+        </svg>
+      </button>
+
+      <a
+        routerLink="/employee/dashboard"
+        class="text-xl font-semibold text-white transition-colors duration-300 ease-in-out hover:text-[#9A5FC0]"
+      >
+        Employee Portal
+      </a>
+    </div>
+
+    <!-- Right Section: Navigation Links and Logout -->
+    <div class="flex items-center gap-6">
+      <ul class="flex items-center gap-6">
+        <li>
+          <a
+            routerLink="/employee/dashboard"
+            class="relative text-gray-300 hover:text-[#9A5FC0] transition-colors duration-300 ease-in-out font-medium text-sm py-1 px-2"
+          >
+            Dashboard
+            <span
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-[#9A5FC0] transform scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left"
+            ></span>
+          </a>
+        </li>
+        <li>
+          <span class="w-px h-4 bg-gray-700"></span>
+        </li>
+        <li>
+          <a
+            routerLink="/employee/dashboard/profile"
+            class="relative text-gray-300 hover:text-[#9A5FC0] transition-colors duration-300 ease-in-out font-medium text-sm py-1 px-2"
+          >
+            Profile
+            <span
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-[#9A5FC0] transform scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left"
+            ></span>
+          </a>
+        </li>
+        <li>
+          <span class="w-px h-4 bg-gray-700"></span>
+        </li>
+        <li>
+          <a
+            routerLink="/employee/dashboard/leave"
+            class="relative text-gray-300 hover:text-[#9A5FC0] transition-colors duration-300 ease-in-out font-medium text-sm py-1 px-2"
+          >
+            Leave
+            <span
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-[#9A5FC0] transform scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left"
+            ></span>
+          </a>
+        </li>
+        <li>
+          <span class="w-px h-4 bg-gray-700"></span>
+        </li>
+        <li>
+          <a
+            routerLink="/employee/dashboard/payslip"
+            class="relative text-gray-300 hover:text-[#9A5FC0] transition-colors duration-300 ease-in-out font-medium text-sm py-1 px-2"
+          >
+            Payslip
+            <span
+              class="absolute bottom-0 left-0 w-full h-0.5 bg-[#9A5FC0] transform scale-x-0 hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left"
+            ></span>
+          </a>
+        </li>
+      </ul>
+      <button
+        class="bg-[#9A5FC0] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#7f4ba1] focus:outline-none focus:ring-2 focus:ring-[#9A5FC0] focus:ring-offset-2 focus:ring-offset-gray-900 transition-colors duration-300 ease-in-out"
+        (click)="logout()"
+        aria-label="Logout"
+      >
+        Logout
+      </button>
+    </div>
+  </div>
+</nav>
